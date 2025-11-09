@@ -31,8 +31,14 @@ Aplicația web este o platformă centralizată pentru managementul sălilor de s
 
 ### 4. Diagrama BD
 
-<img src="images/diagramaDB.png" alt="DiagramaDB">
+<img src="DiagramaBD.png" alt="DiagramaDB">
 
 ----
 
 ### 5. Diagrame UML
+
+<img src="FlowAbonament.png" alt="DiagramaDB">
+
+<img src="FlowClasa.png" alt="DiagramaDB">
+
+<img src="FlowNewsletter.png" alt="DiagramaDB">
