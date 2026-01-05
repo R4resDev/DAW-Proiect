@@ -19,7 +19,7 @@ if (!$antrenor) {
     die("Antrenorul nu a fost găsit.");
 }
 
-$pret_antrenor = 150.00; // Preț fix pentru simulare
+$pret_antrenor = 150.00;
 ?>
 <!DOCTYPE html>
 <html lang="ro">
