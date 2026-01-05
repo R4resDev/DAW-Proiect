@@ -1,5 +1,4 @@
 <?php
-// register.php
 session_start();
 require_once 'operatii_db.php'; 
 require_once 'functions.php';
