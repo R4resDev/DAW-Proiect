@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'functions.php'; // Pentru funcția de curățare e()
+require_once 'functions.php';
 ?>
 <!DOCTYPE html>
 <html lang="ro">
