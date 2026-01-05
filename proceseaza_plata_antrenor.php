@@ -12,8 +12,6 @@ $id_antrenor = $_POST['id_antrenor'];
 $suma = $_POST['suma'];
 
 try {
-    // 1. Înregistrăm plata în tabelul 'plati'
-    // id_abonament va fi NULL deoarece este o plată pentru antrenor
     OperatiiDB::create('plati', [
         'id_user' => $id_user,
         'id_abonament' => null, 
@@ -21,7 +19,6 @@ try {
         'data_platii' => date('Y-m-d H:i:s')
     ]);
 
-    // 2. Actualizăm antrenorul asociat utilizatorului
     OperatiiDB::update('utilizatori', 
         ['id_antrenor_asociat' => $id_antrenor], 
         "id_user = :id_u", 
