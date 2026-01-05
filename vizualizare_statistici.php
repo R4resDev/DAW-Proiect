@@ -11,32 +11,26 @@ if (!isset($_SESSION['user_id'])) {
 $is_admin = ($_SESSION['user_rol'] === 'admin');
 $selected_user_id = $_GET['user_id'] ?? null;
 
-// Dacă e utilizator normal, vede doar datele lui
 if (!$is_admin) {
     $selected_user_id = $_SESSION['user_id'];
 }
 
-// 1. Dacă e admin, luăm lista de utilizatori pentru dropdown
 $utilizatori = [];
 if ($is_admin) {
     $utilizatori = OperatiiDB::read('utilizatori', "ORDER BY nume ASC");
 }
 
-// 2. Definirea filtrelor pentru interogare
 $where_clause = "";
 $params = [];
 
 if ($selected_user_id) {
-    // Statistici pentru un utilizator specific (sau pentru mine, dacă sunt user normal)
     $where_clause = "WHERE id_user = :uid";
     $params = ['uid' => $selected_user_id];
     $titlu_statistici = "Statistici pentru utilizatorul selectat";
 } else {
-    // Statistici globale (doar pentru admin)
     $titlu_statistici = "Statistici Globale Site";
 }
 
-// 3. Calcul Accesări și Logări
 $toate_vizitele = OperatiiDB::read('vizite', $where_clause, $params);
 $total_accesari = count($toate_vizitele);
 
@@ -44,7 +38,6 @@ $logari_query = $where_clause ? $where_clause . " AND pagina_accesata = 'LOGIN_S
 $logari = OperatiiDB::read('vizite', $logari_query, $params);
 $nr_logari = count($logari);
 
-// 4. Pregătire Grafic (Ultimele 7 zile)
 $grafic_query = $where_clause ? $where_clause . " AND data_accesarii >= DATE_SUB(NOW(), INTERVAL 7 DAY)" : "WHERE data_accesarii >= DATE_SUB(NOW(), INTERVAL 7 DAY)";
 $statistici_zile = OperatiiDB::read('vizite', $grafic_query . " ORDER BY data_accesarii ASC", $params);
 
