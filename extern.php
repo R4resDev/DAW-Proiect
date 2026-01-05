@@ -2,10 +2,8 @@
 // extern.php
 
 function getFitnessNews() {
-    // Sursă externă stabilă (BBC Health)
     $url = "http://feeds.bbci.co.uk/news/health/rss.xml";
     
-    // Titlul curat, fără paranteze
     $html = "<h3>Știri Sănătate</h3><div class='news-box'>";
     
     if (!function_exists('curl_init')) {
@@ -16,7 +14,7 @@ function getFitnessNews() {
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)');
-    curl_setopt($ch, CURLOPT_TIMEOUT, 3); // Așteaptă maxim 3 secunde ca să nu blocheze dashboard-ul
+    curl_setopt($ch, CURLOPT_TIMEOUT, 3);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
     
     $data = curl_exec($ch);
@@ -24,7 +22,6 @@ function getFitnessNews() {
     curl_close($ch);
 
     if ($data && $http_code == 200) {
-        // Folosim @ pentru a ignora eventualele erori de structură XML
         $xml = @simplexml_load_string($data);
         
         if ($xml && isset($xml->channel->item)) {
